@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 
 namespace Start
 {
@@ -18,7 +19,7 @@ namespace Start
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IGreeter greeter)
         {
             if (env.IsDevelopment())
             {
@@ -27,7 +28,8 @@ namespace Start
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                var greeting = greeter.GetMessageOfTheDay();
+                await context.Response.WriteAsync(greeting);
             });
         }
     }
