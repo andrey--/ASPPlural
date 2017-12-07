@@ -38,7 +38,7 @@ namespace Start
             //            await context.Response.WriteAsync("Hit");
             //            logger.LogInformation("Request handled");
             //        }
-            //        else
+            //       else
             //        {
             //            await next(context);
             //            logger.LogInformation("Response outgoing");
@@ -49,6 +49,7 @@ namespace Start
             //{
             //    Path = "/wp"
             //});
+            app.UseFileServer();
             app.Run(async (context) =>
             {
                 
