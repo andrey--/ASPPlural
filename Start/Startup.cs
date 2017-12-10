@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Routing;
 
 namespace Start
 {
@@ -51,13 +52,23 @@ namespace Start
             //    Path = "/wp"
             //});
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc((IRouteBuilder routeBuilder) =>
+             {
+                 routeBuilder.MapRoute("Default",
+                  "{controller=Home}/{action=Index}/{id?}");
+             });
+         
+        
             app.Run(async (context) =>
             {
                 
                 var greeting = greeter.GetMessageOfTheDay();
+                context.Response.ContentType = "text/plain";
                 await context.Response.WriteAsync($"{greeting}:{env.EnvironmentName}");
             });
         }
+
+//        private void ConfigureRoutes(IRouteBuilder routeBuilder) => routeBuilder.MapRoute("Default",
+//"controller}/{action}");
     }
 }
