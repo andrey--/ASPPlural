@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Start
+namespace Start.Services
 {
     public interface IGreeter
     {
