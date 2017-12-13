@@ -1,10 +1,18 @@
-﻿@model Start.Models.Restaurant
+﻿@model IEnumerable<Start.Models.Restaurant>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
 </head>
 <body>
+    <table>
+        @foreach (var restaurant in Model)
+        {
+            <tr>
+                <td>@restaurant.Id</td>
+                <td>@restaurant.Name</td>
+            </tr>
+        }
+    </table>>
 </body>
-    <h1>@Model.Name</h1>
-    <div>This is index view</div>
+    
 </html>
