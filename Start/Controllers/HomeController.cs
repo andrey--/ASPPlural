@@ -42,5 +42,9 @@ namespace Start.Controllers
             }
             
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
