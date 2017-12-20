@@ -2,10 +2,6 @@
 using Start.Models;
 using Start.Services;
 using Start.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Start.Controllers
 {
@@ -43,18 +39,27 @@ namespace Start.Controllers
             
         }
         [HttpGet]
+        [ValidateAntiForgeryToken]
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
+
         public IActionResult Create(RestaurantEditModel model)
         {
-            var newRestaurant = new Restaurant();
-            newRestaurant.Name = model.Name;
-            newRestaurant.Cuisine = model.Cuisine;
-            newRestaurant = _restaurantData.Add(newRestaurant);
-            return RedirectToAction(nameof(Details), new { id = newRestaurant.Id });
+            if (ModelState.IsValid)
+            {
+                var newRestaurant = new Restaurant();
+                newRestaurant.Name = model.Name;
+                newRestaurant.Cuisine = model.Cuisine;
+                newRestaurant = _restaurantData.Add(newRestaurant);
+                return RedirectToAction(nameof(Details), new { id = newRestaurant.Id });
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }
