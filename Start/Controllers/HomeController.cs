@@ -39,13 +39,12 @@ namespace Start.Controllers
             
         }
         [HttpGet]
-        [ValidateAntiForgeryToken]
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
-
+        [ValidateAntiForgeryToken]
         public IActionResult Create(RestaurantEditModel model)
         {
             if (ModelState.IsValid)
