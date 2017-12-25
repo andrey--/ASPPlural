@@ -18,20 +18,26 @@ namespace Start
     public class Startup
     {
         private IConfiguration _configuration;
-
+       
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
+            var builder = new ConfigurationBuilder();
             _configuration = configuration;
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
         }
-            public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IGreeter, Greeter>();
             services.AddScoped<IRestaurantData, SqlRestaurantData>();
-            services.AddDbContext<OdeToFoodDbContext>(options=>options.UseSqlServer(_configuration.GetConnectionString("OdeToFood")));
+            services.AddDbContext<OdeToFoodDbContext>(options=>options.UseSqlServer(_configuration["OdeToFoodConnectionString"]));
             services.AddMvc();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
