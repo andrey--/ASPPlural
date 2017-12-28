@@ -1,7 +1,6 @@
 ﻿@model Start.ViewModels.HomeIndexViewModel
-@{ 
+@{
     ViewBag.Title = "Home Page";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h1>All Restaurants</h1>
 <table>
@@ -16,6 +15,6 @@
 </table>
 <a asp-action="Create">Add Restaurant</a>
 
-@section footer{ 
-@Model.CurrentMessage
+@section footer{
+    @Model.CurrentMessage
 }
