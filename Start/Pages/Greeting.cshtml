@@ -1,2 +1,3 @@
-﻿@page
-<div>Hello!</div>
+﻿@page "{name}"
+@model GreetingModel
+<div>@Model.CurrentGreeting</div>
