@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Start.Models;
 using Start.Services;
 using Start.ViewModels;
 
 namespace Start.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private IRestaurantData _restaurantData;
@@ -16,6 +18,7 @@ namespace Start.Controllers
             _restaurantData = restaurantData;
             _greeter = greeter;
         }
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var model = new HomeIndexViewModel
@@ -39,8 +42,10 @@ namespace Start.Controllers
             
         }
         [HttpGet]
+        
         public IActionResult Create()
         {
+
             return View();
         }
         [HttpPost]

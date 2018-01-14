@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Routing;
 using Start.Services;
 using Start.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Rewrite;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 namespace Start
 {
@@ -33,6 +36,16 @@ namespace Start
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            })
+            .AddOpenIdConnect(options=>
+            {
+                _configuration.Bind("AzureAd", options);
+            })
+            .AddCookie();
             services.AddSingleton<IGreeter, Greeter>();
             services.AddScoped<IRestaurantData, SqlRestaurantData>();
             services.AddDbContext<OdeToFoodDbContext>(options=>options.UseSqlServer(_configuration["OdeToFoodConnectionString"]));
@@ -47,6 +60,7 @@ namespace Start
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseRewriter(new RewriteOptions().AddRedirectToHttpsPermanent());
 
             //app.Use(next =>
             //{
@@ -70,6 +84,7 @@ namespace Start
             //    Path = "/wp"
             //});
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseMvc((IRouteBuilder routeBuilder) =>
              {
                  routeBuilder.MapRoute("Default",

@@ -10,8 +10,26 @@
         @RenderBody()
     </div>
     <footer>
-        @RenderSection("footer", required:false)
+        @RenderSection("footer", required: false)
         <vc:greeter></vc:greeter>
+        @if (User.Identity.IsAuthenticated)
+        {
+            foreach (var identity in User.Identities)
+            {
+                <h3>@identity.Name</h3>
+                <ul>
+                    @foreach (var claim in User.Claims)
+                    {
+                        <li>@claim.Type  - @claim.Value</li>
+                    }
+
+                </ul>
+            }
+        }
+        else
+        {
+            <div>You are anonymous</div>
+        }
     </footer>
 </body>
 </html>
