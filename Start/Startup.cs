@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -84,14 +79,15 @@ namespace Start
             //    Path = "/wp"
             //});
             app.UseStaticFiles();
+            app.UseNodeModules(env.ContentRootPath);
+
             app.UseAuthentication();
             app.UseMvc((IRouteBuilder routeBuilder) =>
              {
                  routeBuilder.MapRoute("Default",
                   "{controller=Home}/{action=Index}/{id?}");
              });
-         
-        
+
             //app.Run(async (context) =>
             //{
                 
