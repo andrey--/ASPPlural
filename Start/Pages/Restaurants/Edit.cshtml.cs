@@ -34,7 +34,8 @@ namespace Start.Pages.Restaurants
             if (ModelState.IsValid)
             {
                 _restaurantData.Update(Restaurant);
-                return RedirectToPage("/RazorList");
+                //return RedirectToPage("/RazorList");
+                return RedirectToAction("Index");
             }
             
             return Page();
