@@ -6,9 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Shared\**" />
     <Compile Remove="Views\Shared\Components\NewFolder1\**" />
+    <Content Remove="Shared\**" />
     <Content Remove="Views\Shared\Components\NewFolder1\**" />
+    <EmbeddedResource Remove="Shared\**" />
     <EmbeddedResource Remove="Views\Shared\Components\NewFolder1\**" />
+    <None Remove="Shared\**" />
     <None Remove="Views\Shared\Components\NewFolder1\**" />
   </ItemGroup>
 
@@ -21,9 +25,6 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0"></DotNetCliToolReference>
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Shared\" />
   </ItemGroup>
 
 </Project>
