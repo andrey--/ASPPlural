@@ -7,13 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OdeToFood.Controllers
+namespace Start.Controllers
 {
     public class AccountController : Controller
     {
         public IActionResult Login()
         {
-            var redirectUrl = Url.Page("/Index");
+            var redirectUrl = Url.Action(nameof(HomeController.Index), "Home"); 
             return Challenge(
                 new AuthenticationProperties { RedirectUri = redirectUrl },
                 // challenge the user by logging in with OIDC server

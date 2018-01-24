@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OdeToFood.Pages.Account
+namespace Start.Pages.Account
 {
     public class SignedOutModel : PageModel
     {
