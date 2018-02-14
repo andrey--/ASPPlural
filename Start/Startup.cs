@@ -24,10 +24,10 @@ namespace Start
         {
             var builder = new ConfigurationBuilder();
             _configuration = configuration;
-            if (env.IsDevelopment())
-            {
-                builder.AddUserSecrets<Startup>();
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    builder.AddUserSecrets<Startup>();
+            //}
         }
         public void ConfigureServices(IServiceCollection services)
         {
@@ -55,7 +55,7 @@ namespace Start
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseRewriter(new RewriteOptions().AddRedirectToHttpsPermanent());
+            //app.UseRewriter(new RewriteOptions().AddRedirectToHttpsPermanent());
 
             //app.Use(next =>
             //{
